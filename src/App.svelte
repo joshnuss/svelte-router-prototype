@@ -1,30 +1,27 @@
 <script>
-	export let name;
+  import Route from './Route.svelte'
+  import {link} from './utils'
+  import {location} from './location'
+
+  import Cart from './Cart.svelte'
 </script>
 
 <main>
-	<h1>Hello {name}!</h1>
-	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
+  <Route path="/">
+    <h1>Home</h1>
+
+    <a href="/products" use:link>Products</a>
+    <a href="/products/foo" use:link>FOO</a>
+    <a href="/cart" use:link>Cart</a>
+  </Route>
+
+  <Route path="/products/*">
+    <h1>Products</h1>
+
+    <Route path="/products/:id" let:params>
+      <h2>Product: {params.id}</h2>
+    </Route>
+  </Route>
+
+  <Route path="/cart" component={Cart} a=1 b=2/>
 </main>
-
-<style>
-	main {
-		text-align: center;
-		padding: 1em;
-		max-width: 240px;
-		margin: 0 auto;
-	}
-
-	h1 {
-		color: #ff3e00;
-		text-transform: uppercase;
-		font-size: 4em;
-		font-weight: 100;
-	}
-
-	@media (min-width: 640px) {
-		main {
-			max-width: none;
-		}
-	}
-</style>
