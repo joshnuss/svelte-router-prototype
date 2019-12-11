@@ -15,6 +15,17 @@
     <a href="/cart" use:link>Cart</a>
   </Route>
 
+  <Route path="/pages/*name" let:params>
+    <h1>Page: {params.name}</h1>
+  </Route>
+
+  <Route path="/category/:parent(/:child)" let:params>
+    <h1>Category: {params.parent}</h1>
+    {#if params.child}
+      <h2>Child: {params.child}</h2>
+    {/if}
+  </Route>
+
   <Route path="/products/*">
     <h1>Products</h1>
 
